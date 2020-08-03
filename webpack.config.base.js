@@ -17,7 +17,33 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.html$/i,
+                use: ['html-loader'],
+            }, {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: ["file-loader"]
+            }, {
+                test: /text-style\.css$/i,
+                use: ["file-loader"]
+            }, {
+                test: /\.styl$/,
+                loader: ['style-loader', 'css-loader', 'stylus-loader']
+            }, {
+                test: /\.less$/i,
+                use: ['style-loader', 'css-loader', 'less-loader']
+            },
+            {
+                test: /\.scss$/i,
+                use: ['style-loader', 'css-loader', {
+                    loader: "sass-loader",
+                    options: {
+                        implementation: require('dart-sass')
+                    }
+                }]
+            },
+            {
                 test: /\.css$/,
+                exclude: /text-style\.css$/i,
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader,
