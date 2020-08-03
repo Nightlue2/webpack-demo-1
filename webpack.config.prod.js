@@ -1,3 +1,6 @@
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const base = require('./webpack.config.base.js');
 
 module.exports = {
@@ -14,6 +17,7 @@ module.exports = {
         rules: [...base.module.rules,
         {
             test: /\.css$/,
+            exclude: /text-style\.css$/i,
             use: [
                 {
                     loader: MiniCssExtractPlugin.loader,
@@ -21,7 +25,7 @@ module.exports = {
                         publicPath: '/public/path/to/',
                     },
                 },
-                'css-loader',
+                'css-loader', 'file-loader'
             ],
         },
         ],
